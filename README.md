@@ -17,4 +17,4 @@ Then, go ahead and download the element's dependencies:
 
 ## How to use this element
 
-Take a look at the demo/index.html
+Take a look at the [demo/index.html](demo/index.html)
