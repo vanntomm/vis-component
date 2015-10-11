@@ -15,8 +15,8 @@
     "polymer"
   ],
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "",
-  "private": true,
+  "homepage": "https://github.com/vanntomm/vis-component",
+  "private": false,
   "ignore": [
     "/.*",
     "/test/"
