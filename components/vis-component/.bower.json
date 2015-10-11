@@ -1,0 +1,41 @@
+{
+  "name": "vis-component",
+  "authors": [
+    "Thomas Herndlbauer"
+  ],
+  "description": "A vis.js network component",
+  "main": "vis-element.html",
+  "moduleType": [],
+  "keywords": [
+    "vis",
+    "web-component",
+    "network",
+    "graph",
+    "polymer"
+  ],
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/vanntomm/vis-component",
+  "private": false,
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "~1.1.5",
+    "vis": "~4.9.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  },
+  "_release": "a8abeb4109",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a8abeb410919cf3381b92dfd51a9b5277f77c8cb"
+  },
+  "_source": "git://github.com/vanntomm/vis-component.git",
+  "_target": "master",
+  "_originalSource": "vanntomm/vis-component",
+  "_direct": true
+}

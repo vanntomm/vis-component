@@ -1,0 +1,55 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>vis-element Demo</title>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../vis-element.html">
+  </head>
+  <body unresolved>
+
+    <p>An example of <code>&lt;vis-element&gt;</code>:</p>
+
+    <vis-element height="500px"></vis-element>
+
+    <script>
+      // var nodes = new vis.DataSet([
+      //   {id: 1, label: 'Node 1'},
+      //   {id: 2, label: 'Node 2'},
+      //   {id: 3, label: 'Node 3'},
+      //   {id: 4, label: 'Node 4'},
+      //   {id: 5, label: 'Node 5'}
+      // ]);
+      //
+      // var edges = new vis.DataSet([
+      //   {from: 1, to: 3},
+      //   {from: 1, to: 2},
+      //   {from: 2, to: 4},
+      //   {from: 2, to: 5}
+      // ]);
+      //
+      // var data = {
+      //   nodes: nodes,
+      //   edges: edges
+      // };
+      //
+      // var visElement = document.querySelector('vis-element');
+      // visElement.setData(data);
+
+      var visElement = document.querySelector('vis-element');
+      visElement.importDotString('dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }');
+
+    </script>
+
+  </body>
+</html>
