@@ -1,0 +1,32 @@
+{
+  "name": "vis-component",
+  "version": "0.0.2",
+  "authors": [
+    "Thomas Herndlbauer"
+  ],
+  "description": "A vis.js network component",
+  "main": "vis-element.html",
+  "moduleType": [],
+  "keywords": [
+    "vis",
+    "web-component",
+    "network",
+    "graph",
+    "polymer"
+  ],
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "~1.1.5",
+    "vis": "~4.9.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
