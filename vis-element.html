@@ -29,13 +29,13 @@ Example:
         display: block;
         box-sizing: border-box;
       }
-      #container {
+      #vis-container {
         width: 100%;
         height: 100%;
       }
     </style>
 
-    <div id="container"></div>
+    <div id="vis-container"></div>
 
   </template>
 </dom-module>
@@ -48,27 +48,45 @@ Example:
       network: Object,
       options: {
         type: Object,
+        observer: '_optionsChanged',
         value: {
           autoResize: true,
           height: '100%',
           width: '100%'
-        }
+          }
+      },
+      dotcontent: {
+        type: String,
+        observer: '_dotcontentChanged'
+      },
+      graph: {
+        type: Object,
+        observer: '_graphChanged'
       },
       width: {
         type: String,
+        value: '100%',
         observer: '_widthChanged'
       },
       height: {
         type: String,
+        value: '100%',
         observer: '_heightChanged'
       }
     },
 
-    attached: function() {},
+    attached: function() {
+      document.getElementById('vis-container').style.height = this.height;
+      document.getElementById('vis-container').style.width = this.width;
+    },
     setData: function(data) {
       this.data = data;
-      var container = document.getElementById('container');
+      var container = document.getElementById('vis-container');
       this.network = new vis.Network(container, this.data, this.options);
+      var thisElement = this;
+      this.network.on("selectNode", function (params) {
+        thisElement.handleSelectNode(params);
+      });
     },
     importDotString: function(dotString) {
       var parsedData = vis.network.convertDot(dotString);
@@ -82,16 +100,56 @@ Example:
     setOptions: function(options) {
       if(this.network === undefined)
       {
-        console.error('network is undefined');
+        console.log('network is undefined');
         return false;
       }
       this.network.setOptions = value;
     },
+    handleSelectNode: function(params) {
+      var eventDetail = {};
+      eventDetail.selectedNode = params.nodes[0];
+      eventDetail.pointer = params.pointer;
+      this.fire('node-selected', eventDetail);
+    },
     _widthChanged: function(value) {
-      document.getElementById('container').style.width = value;
+      if(document.getElementById('vis-container') === null)
+      {
+        console.log('vis-container is null');
+        return false;
+      }
+      document.getElementById('vis-container').style.width = value;
     },
     _heightChanged: function(value) {
-      document.getElementById('container').style.height = value;
+      if(document.getElementById('vis-container') === null)
+      {
+        console.log('vis-container is null');
+        return false;
+      }
+      document.getElementById('vis-container').style.height = value;
+    },
+    _dotcontentChanged: function(value) {
+      if(value === undefined || value === null)
+      {
+        console.log('dotcontent is undefined or null');
+        return false;
+      }
+      this.importDotString(value);
+    },
+    _graphChanged: function(value) {
+      if(value === undefined || value === null)
+      {
+        console.log('graph is undefined or null');
+        return false;
+      }
+      this.setData(value);
+    },
+    _optionsChanged: function(value) {
+      if(value === undefined || value === null)
+      {
+        console.log('options are undefined or null');
+        return false;
+      }
+      this.setOptions(value);
     }
   });
 </script>
