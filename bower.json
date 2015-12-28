@@ -22,7 +22,7 @@
     "/test/"
   ],
   "dependencies": {
-    "polymer": "#^1.2.3",
+    "polymer": "#^1.2.0",
     "vis": "#^4.11.0"
   },
   "devDependencies": {
