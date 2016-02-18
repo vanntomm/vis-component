@@ -18,38 +18,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   <body unresolved>
 
-    <p>An example of <code>&lt;vis-element&gt;</code>:</p>
+    <h2>An example of <code>&lt;vis-element&gt;</code>:</h2>
 
-    <vis-element height="500px"></vis-element>
+    <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
+    <code>&lt;vis-element dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"&gt;&lt;/vis-element&gt;</code>
+    <vis-element dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"></vis-element>
 
-    <script>
-      // var nodes = new vis.DataSet([
-      //   {id: 1, label: 'Node 1'},
-      //   {id: 2, label: 'Node 2'},
-      //   {id: 3, label: 'Node 3'},
-      //   {id: 4, label: 'Node 4'},
-      //   {id: 5, label: 'Node 5'}
-      // ]);
-      //
-      // var edges = new vis.DataSet([
-      //   {from: 1, to: 3},
-      //   {from: 1, to: 2},
-      //   {from: 2, to: 4},
-      //   {from: 2, to: 5}
-      // ]);
-      //
-      // var data = {
-      //   nodes: nodes,
-      //   edges: edges
-      // };
-      //
-      // var visElement = document.querySelector('vis-element');
-      // visElement.setData(data);
-
-      var visElement = document.querySelector('vis-element');
-      visElement.importDotString('dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }');
-
-    </script>
+    <script></script>
 
   </body>
 </html>
