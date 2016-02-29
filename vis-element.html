@@ -29,13 +29,13 @@ Example:
         display: block;
         box-sizing: border-box;
       }
-      #vis-container {
+      #vis_container {
         width: 100%;
         height: 100%;
       }
     </style>
 
-    <div id="vis-container"></div>
+    <div id="vis_container"></div>
 
   </template>
 </dom-module>
@@ -76,12 +76,12 @@ Example:
     },
 
     attached: function() {
-      document.getElementById('vis-container').style.height = this.height;
-      document.getElementById('vis-container').style.width = this.width;
+      this.$.vis_container.style.height = this.height;
+      this.$.vis_container.style.width = this.width;
     },
     setData: function(data) {
       this.data = data;
-      var container = document.getElementById('vis-container');
+      var container = this.$.vis_container;
       this.network = new vis.Network(container, this.data, this.options);
       var thisElement = this;
       this.network.on("selectNode", function (params) {
@@ -112,20 +112,20 @@ Example:
       this.fire('node-selected', eventDetail);
     },
     _widthChanged: function(value) {
-      if(document.getElementById('vis-container') === null)
+      if(this.$.vis_container === null)
       {
-        console.log('vis-container is null');
+        console.log('vis container is null');
         return false;
       }
-      document.getElementById('vis-container').style.width = value;
+      this.$.vis_container.style.width = value;
     },
     _heightChanged: function(value) {
-      if(document.getElementById('vis-container') === null)
+      if(this.$.vis_container === null)
       {
-        console.log('vis-container is null');
+        console.log('vis container is null');
         return false;
       }
-      document.getElementById('vis-container').style.height = value;
+      this.$.vis_container.style.height = value;
     },
     _dotcontentChanged: function(value) {
       if(value === undefined || value === null)
