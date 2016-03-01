@@ -88,6 +88,13 @@ Example:
         thisElement.handleSelectNode(params);
       });
     },
+    importNodesAndEdges: function(nodes, edges) {
+      var data = {
+        nodes: new vis.DataSet(nodes),
+        edges: new vis.DataSet(edges)
+      };
+      this.setData(data);
+    },
     importDotString: function(dotString) {
       var parsedData = vis.network.convertDot(dotString);
       this.options = parsedData.options;

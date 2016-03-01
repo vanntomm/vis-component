@@ -15,20 +15,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <title>vis-element Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../vis-element.html">
+
+    <style>
+      h2 { color: blue; }
+      .box { width: 80%; }
+    </style>
   </head>
   <body unresolved>
 
     <h2>An example of <code>&lt;vis-element&gt;</code>:</h2>
 
-    <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
-    <code>&lt;vis-element dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"&gt;&lt;/vis-element&gt;</code>
-    <vis-element id="dotcontent" dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"></vis-element>
-    <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
+    <div class="box">
+      <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
+      <code>&lt;vis-element dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"&gt;&lt;/vis-element&gt;</code>
+      <vis-element id="dotcontent" dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"></vis-element>
+    </div>
+    
+    <div class="box">
+      <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
     <vis-element id="graph" height="500px"></vis-element>
+    </div>
 
     <script>
       // create an array with nodes
-      var _nodes = [
+      var nodes = [
         {id: 1, label: 'Node 1'},
         {id: 2, label: 'Node 2'},
         {id: 3, label: 'Node 3'},
@@ -37,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ];
 
       // create an array with edges
-      var _edges = [
+      var edges = [
         {from: 1, to: 3},
         {from: 1, to: 2},
         {from: 2, to: 4},
@@ -45,12 +55,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ];
 
       // create a network
-      var _data = {
-        nodes: new vis.DataSet(_nodes),
-        edges: new vis.DataSet(_edges)
-      };
       var visElement = document.getElementById("graph");
-      visElement.setData(_data);
+      visElement.importNodesAndEdges(nodes, edges);
     </script>
 
   </body>
