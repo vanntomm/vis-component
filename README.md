@@ -1,6 +1,6 @@
 # vis-component
 
-A wrapped vis.js network module web-component.
+A wrapped [vis.js](http://visjs.org/) network module web-component.
 
 
 ## Usage
