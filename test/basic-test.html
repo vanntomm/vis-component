@@ -17,17 +17,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../vis-element.html">
+    <link rel="import" href="../vis-component.html">
   </head>
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <vis-element></vis-element>
+    <vis-component></vis-component>
 
     <script>
-      var visElement = document.querySelector('vis-element');
+      var visElement = document.querySelector('vis-component');
 
-      suite('<vis-element>', function() {
+      suite('<vis-component>', function() {
         test('DOTstring import test', function() {
           visElement.importDotString('dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }');
           assert.ok(visElement.network, 'Network');

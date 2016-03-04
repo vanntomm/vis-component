@@ -1,0 +1,180 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+<script src="../vis/dist/vis.min.js"></script>
+<!--
+An element wrapping vis.js
+So far just the Network modul is supported
+
+Example:
+
+    <vis-component dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }"></vis-component>
+
+@group Seed Elements
+@element vis-component
+@demo demo/index.html
+-->
+<dom-module id="vis-component">
+  <template>
+    <style>
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+    
+    #vis_container {
+      width: 100%;
+      height: 100%;
+    }
+    </style>
+    <div id="vis_container"></div>
+  </template>
+</dom-module>
+<script>
+Polymer({
+  is: 'vis-component',
+  properties: {
+    /**
+      * The vis.js Network object
+      *
+      * @attribute network
+      * @type Object
+      */
+    network: {
+      type: Object
+    },
+    /**
+      * The vis.js Network options
+      *
+      * @attribute options
+      * @type Object
+      */
+    options: {
+      type: Object,
+      observer: '_optionsChanged',
+      value: {
+        autoResize: true,
+        height: '100%',
+        width: '100%'
+      }
+    },
+    /**
+      * You can pass dot strings right at the creation of the element.
+      *
+      * @attribute dotcontent
+      * @type String
+      */
+    dotcontent: {
+      type: String,
+      observer: '_dotcontentChanged'
+    },
+    /**
+      * The width of the internal vis container.
+      *
+      * @attribute width
+      * @type String
+      * @default '100%'
+      */
+    width: {
+      type: String,
+      value: '100%',
+      observer: '_widthChanged'
+    },
+    /**
+      * The height of the internal vis container.
+      *
+      * @attribute height
+      * @type String
+      * @default '100%'
+      */
+    height: {
+      type: String,
+      value: '100%',
+      observer: '_heightChanged'
+    }
+  },
+  attached: function() {
+    this.$.vis_container.style.height = this.height;
+    this.$.vis_container.style.width = this.width;
+  },
+  setData: function(data) {
+    var container = this.$.vis_container;
+    this.network = new vis.Network(container, data, this.options);
+    var thisElement = this;
+    this.network.on('selectNode', function(params) {
+      thisElement.handleSelectNode(params);
+    });
+  },
+  importNodesAndEdges: function(nodes, edges) {
+    var data = {
+      nodes: new vis.DataSet(nodes),
+      edges: new vis.DataSet(edges)
+    };
+    this.setData(data);
+  },
+  importDotString: function(dotString) {
+    var parsedData = vis.network.convertDot(dotString);
+    this.options = parsedData.options;
+    var data = {
+      nodes: parsedData.nodes,
+      edges: parsedData.edges
+    }
+    this.setData(data);
+  },
+  setOptions: function(options) {
+    if (this.network === undefined) {
+      console.log('network is undefined');
+      return false;
+    }
+    this.network.setOptions = value;
+  },
+  handleSelectNode: function(params) {
+    var eventDetail = {};
+    eventDetail.selectedNode = params.nodes[0];
+    eventDetail.pointer = params.pointer;
+    this.fire('node-selected', eventDetail);
+  },
+  _widthChanged: function(value) {
+    if (this.$.vis_container === null) {
+      console.log('vis container is null');
+      return false;
+    }
+    this.$.vis_container.style.width = value;
+  },
+  _heightChanged: function(value) {
+    if (this.$.vis_container === null) {
+      console.log('vis container is null');
+      return false;
+    }
+    this.$.vis_container.style.height = value;
+  },
+  _dotcontentChanged: function(value) {
+    if (value === undefined || value === null) {
+      console.log('dotcontent is undefined or null');
+      return false;
+    }
+    this.importDotString(value);
+  },
+  _graphChanged: function(value) {
+    if (value === undefined || value === null) {
+      console.log('graph is undefined or null');
+      return false;
+    }
+    this.setData(value);
+  },
+  _optionsChanged: function(value) {
+    if (value === undefined || value === null) {
+      console.log('options are undefined or null');
+      return false;
+    }
+    this.setOptions(value);
+  }
+});
+</script>

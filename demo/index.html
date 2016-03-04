@@ -12,9 +12,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>vis-element Demo</title>
+    <title>vis-component Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../vis-element.html">
+    <link rel="import" href="../vis-component.html">
 
     <style>
       h2 { color: blue; }
@@ -23,17 +23,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   <body unresolved>
 
-    <h2>An example of <code>&lt;vis-element&gt;</code>:</h2>
+    <h2>An example of <code>&lt;vis-component&gt;</code>:</h2>
 
     <div class="box">
       <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
-      <code>&lt;vis-element dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"&gt;&lt;/vis-element&gt;</code>
-      <vis-element id="dotcontent" dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"></vis-element>
+      <code>&lt;vis-component dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"&gt;&lt;/vis-component&gt;</code>
+      <vis-component id="dotcontent" dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }" height="500px"></vis-component>
     </div>
     
     <div class="box">
       <p>This is an dot string example. You can pass dot strings right at the creation of the element</p>
-    <vis-element id="graph" height="500px"></vis-element>
+    <vis-component id="graph" height="500px"></vis-component>
     </div>
 
     <script>

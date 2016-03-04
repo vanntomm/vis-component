@@ -5,14 +5,16 @@
     "Thomas Herndlbauer"
   ],
   "description": "A vis.js network component",
-  "main": "vis-element.html",
+  "main": "vis-component.html",
   "moduleType": [],
   "keywords": [
     "vis",
     "web-component",
     "network",
     "graph",
-    "polymer"
+    "polymer",
+    "vis.js",
+    "web-components"
   ],
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/vanntomm/vis-component",
