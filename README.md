@@ -1,20 +1,20 @@
 # vis-component
 
-A wrapped vis.js network module web-component.
+A wrapped [vis.js](http://visjs.org/) network module web-component.
 
 
-## Dependencies
+## Usage
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+Install the component via [Bower](http://bower.io/):
 
-    npm install -g bower
+    bower i vis-component -S
 
-Then, go ahead and download the element's dependencies:
+Import the component:
 
-    bower install
+    <link rel="import" href="../bower_components/vis-component.html">
 
+Use it:
 
-## How to use this element
+    <vis-component dotcontent="dinetwork {1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }"></vis-component>
 
-Take a look at the [demo/index.html](demo/index.html)
+![Preview](preview.png)
