@@ -8,6 +8,9 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <script src="../vis/dist/vis.min.js"></script>
 <!--
 An element wrapping vis.js
@@ -33,8 +36,25 @@ Example:
       width: 100%;
       height: 100%;
     }
+    
+    .flex-center-align {
+      @apply(--layout-horizontal);
+      @apply(--layout-center-center);
+    }
+    
+    paper-material {
+      padding: 1em;
+      background-color: white;
+      margin-left: auto;
+      margin-right: auto;
+    }
     </style>
-    <div id="vis_container"></div>
+    <div id="vis_container" hidden$="{{isStabilizing}}"></div>
+    <div class="flex-center-align">
+      <paper-material elevation="1" hidden$="{{!isStabilizing}}">
+        <paper-progress value="{{currentIteration}}" max="{{maxIterations}}"></paper-progress>
+      </paper-material>
+    </div>
   </template>
 </dom-module>
 <script>
@@ -42,20 +62,21 @@ Polymer({
   is: 'vis-component',
   properties: {
     /**
-      * The vis.js Network object
-      *
-      * @attribute network
-      * @type Object
-      */
+     * The vis.js Network object
+     *
+     * @attribute network
+     * @type Object
+     */
     network: {
-      type: Object
+      type: Object,
+      observer: 'networkChanged'
     },
     /**
-      * The vis.js Network options
-      *
-      * @attribute options
-      * @type Object
-      */
+     * The vis.js Network options
+     *
+     * @attribute options
+     * @type Object
+     */
     options: {
       type: Object,
       observer: '_optionsChanged',
@@ -66,38 +87,48 @@ Polymer({
       }
     },
     /**
-      * You can pass dot strings right at the creation of the element.
-      *
-      * @attribute dotcontent
-      * @type String
-      */
+     * You can pass dot strings right at the creation of the element.
+     *
+     * @attribute dotcontent
+     * @type String
+     */
     dotcontent: {
       type: String,
       observer: '_dotcontentChanged'
     },
     /**
-      * The width of the internal vis container.
-      *
-      * @attribute width
-      * @type String
-      * @default '100%'
-      */
+     * The width of the internal vis container.
+     *
+     * @attribute width
+     * @type String
+     * @default '100%'
+     */
     width: {
       type: String,
       value: '100%',
       observer: '_widthChanged'
     },
     /**
-      * The height of the internal vis container.
-      *
-      * @attribute height
-      * @type String
-      * @default '100%'
-      */
+     * The height of the internal vis container.
+     *
+     * @attribute height
+     * @type String
+     * @default '100%'
+     */
     height: {
       type: String,
       value: '100%',
       observer: '_heightChanged'
+    },
+    isStabilizing: {
+      type: Boolean,
+      value: false
+    },
+    maxIterations: {
+      type: Number
+    },
+    currentIteration: {
+      type: Number
     }
   },
   attached: function() {
@@ -111,6 +142,19 @@ Polymer({
     this.network.on('selectNode', function(params) {
       thisElement.handleSelectNode(params);
     });
+  },
+  networkChanged: function(newNetwork) {
+    if (!newNetwork) {
+      return;
+    }
+    newNetwork.on("stabilizationProgress", function(params) {
+      this.set('isStabilizing', true);
+      this.set('currentIteration', params.iterations);
+      this.set('maxIterations', params.total);
+    }.bind(this));
+    newNetwork.once("stabilizationIterationsDone", function() {
+      this.set('isStabilizing', false);
+    }.bind(this));
   },
   importNodesAndEdges: function(nodes, edges) {
     var data = {
